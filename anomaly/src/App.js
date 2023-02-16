@@ -1,11 +1,20 @@
 
 import './App.css';
+import Home from './pages/Home';
+import Index from './pages/Index';
+import Social from './pages/Social';
 
 function App() {
   return (
-    <h1 className="text-3xl text-center font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      {/* <Index/> */}
+      {/* <Home/> */}
+      <Social/>
+
+
+    </div>
+
+
   );
 }
 
