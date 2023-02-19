@@ -8,16 +8,13 @@ const SideBar = () => {
                             <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent dark:text-white" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Social</a>
+                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Trending</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Event</a>
+                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Latest</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100  dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Pricing</a>
-                        </li>
-                        <li>
-                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Contact</a>
+                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Events</a>
                         </li>
                     </ul>
                 </div>

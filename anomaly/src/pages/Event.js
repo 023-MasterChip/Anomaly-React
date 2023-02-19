@@ -5,9 +5,10 @@ import Post from '../components/Post'
 import SearchBar from '../components/SearchBar'
 import SideBar from '../components/SideBar'
 
-const Social = () => {
-    return (
-        <div className='flex flex-col fixed w-full bg-gray-900'>
+
+const Event = () => {
+  return (
+    <div className='flex flex-col fixed w-full bg-gray-900'>
             <Navbar />
             <div className='flex flex-row'>
                 <div className='bg-gray-900 p-8 h-screen'>
@@ -47,7 +48,7 @@ const Social = () => {
                 </div>
             </div>
         </div>
-    )
+  )
 }
 
-export default Social
+export default Event
