@@ -4,7 +4,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'Audiowide': ['Audiowide', 'sans-serif'],
+        'Michroma': ['Michroma', 'sans-serif'],
+        'Teko': ['Teko', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }

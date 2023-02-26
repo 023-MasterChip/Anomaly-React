@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import UploadBtn from '../components/UploadBtn';
 import UserProfile from '../components/UserProfile';
-import UserGallery from '../components/UserGallery';
 import ImageGrid from '../components/ImageGrid';
 
 const User = () => {
@@ -53,16 +52,8 @@ const User = () => {
                     </ul>
                     <UploadBtn />
                 </div>
-                <div className='w-screen max-h-screen overflow-y-auto p-4 bg-gray-900'>
+                <div className='w-screen max-h-screen h-full overflow-y-auto p-4 bg-gray-900'>
                     <CompSwitch/>
-                    {/* display the comp here */}
-                    {/* <LinkPage/> */}
-                    {/* <section id='one' className='h-screen w-auto mx-10 my-5'>
-                        <UserProfile />
-                    </section>
-                    <section id='two' className='h-screen w-auto'>
-                        <ImageGrid images={images} />
-                    </section> */}
                 </div>
             </div>
         </div>

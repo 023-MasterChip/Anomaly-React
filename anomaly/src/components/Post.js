@@ -12,8 +12,8 @@ const Post = ({ profileImageSrc, username, imageSrc, title }) => {
                         <img src={profileImageSrc} alt="profilepic" />
                     </div>
                     <div className='flex flex-col-reverse mx-2'>
-                        <span class="pt-1 ml-2 font-bold text-sm text-gray-300">{username}</span>
-                        <span class="pt-1 ml-2 font-bold text-lg text-gray-100">{title}</span>
+                        <span class="pt-1 ml-2 font-bold font-mono text-sm text-gray-300">{username}</span>
+                        <span class="pt-1 ml-2 font-bold font-Michroma text-lg text-gray-100">{title}</span>
                     </div>
 
                 </div>

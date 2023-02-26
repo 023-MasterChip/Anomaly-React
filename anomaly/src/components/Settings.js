@@ -10,30 +10,51 @@ const Settings = ({ setShowModal }) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-              <h3 className="text-3xl font-semibold">
-                Modal Title
+              <h3 className="text-3xl font-semibold text-center w-full">
+                Profile Settings
               </h3>
-              <button
-                className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onClick={() => setShowModal(false)}
-              >
-                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  ×
-                </span>
-              </button>
             </div>
             {/*body*/}
             <div className="relative p-6 flex-auto">
-              <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                I always felt like I could do anything. That’s the main
-                thing people are controlled by! Thoughts- their perception
-                of themselves! They're slowed down by their perception of
-                themselves. If you're taught you can’t do anything, you
-                won’t do anything. I was taught I could do everything.
-              </p>
+              <div className='w-full flex justify-center'>
+                <img
+                  className='w-20 h-20 object-cover rounded-full'
+                  src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+                  alt='user image'></img>
+              </div>
+              <form className='mx-10 flex flex-col justify-center'>
+                <div className='flex flex-row justify-evenly m-2'>
+                  <label className='mx-4 font-Teko text-2xl'>Name</label>
+                  <input type='text' name='name' placeholder='Emma Carter' className='mx-4 px-4'></input>
+                </div>
+                <div className='flex flex-row justify-between  m-2'>
+                  <label className='mx-4 font-Teko text-2xl'>Username</label>
+                  <input type='text' name='username' placeholder='Emma.Artistry' className='mx-4 px-4'></input>
+                </div>
+                <div className='flex flex-row justify-between  m-2'>
+                  <label className='mx-4 font-Teko text-2xl'>Email</label>
+                  <input type='email' name='email' placeholder='emmacarter@gmail.com' className='mx-4 px-4'></input>
+                </div>
+              </form>
+              <div>
+                <button
+                  className="flex justify-end w-full text-blue-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                >
+                  Edit
+                </button>
+              </div>
             </div>
             {/*footer*/}
             <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+              <button
+                className="flex justify-start w-full text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={() => setShowModal(false)}
+              >
+                LOGOUT
+              </button>
               <button
                 className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
@@ -46,7 +67,7 @@ const Settings = ({ setShowModal }) => {
                 type="button"
                 onClick={() => setShowModal(false)}
               >
-                Save Changes
+                Save
               </button>
             </div>
           </div>

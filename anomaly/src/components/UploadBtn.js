@@ -3,7 +3,7 @@ import './UploadBtn.css'
 
 const UploadBtn = () => {
     return (
-        <div className='upload flex justify-center'>
+        <div className='upload flex justify-center m-4'>
             <button>
                 UPLOAD
             </button>
