@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import UploadBtn from '../components/UploadBtn';
 import UserProfile from '../components/UserProfile';
 import ImageGrid from '../components/ImageGrid';
+import Friends from '../components/Friends';
 
 const User = () => {
     const images = [
@@ -31,13 +32,13 @@ const User = () => {
             return <ImageGrid images={images}/>
         }
         if(comp === 2){
-            return <UserProfile/>
+            return <Friends/>
         }
     }
     return (
         <div className='flex flex-col fixed w-full bg-gray-900'>
             <Navbar />
-            <div className='flex flex-col w-full'>
+            <div className='flex flex-col w-full h-screen bg-gray-900'>
                 <div className='bg-gray-900 w-full h-auto flex justify-between items-start'>
                     <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
@@ -47,7 +48,7 @@ const User = () => {
                             <a onClick={()=> setComp(1)} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Gallery</a>
                         </li>
                         <li>
-                            <a onClick={()=> setComp(2)} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Events</a>
+                            <a onClick={()=> setComp(2)} className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Following</a>
                         </li>
                     </ul>
                     <UploadBtn />

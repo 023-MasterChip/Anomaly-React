@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
+import FileUpload from './FileUpload';
 import './UploadBtn.css'
 
 const UploadBtn = () => {
+    const [showModal, setShowModal] = useState(false);
     return (
-        <div className='upload flex justify-center m-4'>
-            <button>
-                UPLOAD
-            </button>
-        </div>
+        <>
+            <div onClick={() => setShowModal(true)} className='upload flex justify-center m-4'>
+                <button >
+                    UPLOAD
+                </button>
+            </div>
+            {showModal ? <FileUpload setShowModal={setShowModal} /> : null}
+        </>
     )
 }
 

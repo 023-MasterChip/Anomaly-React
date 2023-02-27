@@ -9,7 +9,7 @@ const Home = () => {
     useEffect(() => {
         if(!user)
         {
-            navigate("/index")
+            navigate("/")
         }
       },[]);
     const [selectedLink, setSelectedLink] = useState('All');

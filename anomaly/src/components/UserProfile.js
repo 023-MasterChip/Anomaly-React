@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const UserProfile = () => {
+
+    const [userProfile, setUserProfile] = useState([])
+
+    useEffect(() => {
+        const fetchProfile = async (profile) => {
+            try {
+                const username = localStorage.getItem("username");
+                // console.log(username)
+                const url = 'http://localhost:5000/user/profile/' + username;
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(profile)
+                });
+                if (response.ok) {
+                    const profile = await response.json();
+                    setUserProfile(profile);
+                    console.log(profile);
+                } else {
+                    throw new Error('Failed to fetch profile data');
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+        };
+        fetchProfile();
+    }, []);
+
     return (
         <div className='bg-gray-900'>
             <div className='flex justify-center'>
@@ -9,8 +40,8 @@ const UserProfile = () => {
             </div>
             <div>
                 <div className='flex flex-col justify-center items-center mt-4'>
-                    <h1 className='text-white font-extrabold text-6xl font-Michroma'>Emma Carter</h1>
-                    <p className='text-white text-center font-medium text-2xl mt-2 font-Michroma'>Emma.Artistry</p>
+                    <h1 className='text-white font-extrabold text-6xl font-Michroma'>{userProfile.name}</h1>
+                    <p className='text-white text-center font-medium text-2xl mt-2 font-Michroma'>{userProfile.username}</p>
                 </div>
             </div>
             <div className='flex flex-row justify-between mx-60 mt-5'>

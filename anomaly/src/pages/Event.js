@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Post from '../components/Post'
 import SearchBar from '../components/SearchBar'
 import SideBar from '../components/SideBar'
+import UploadBtn from '../components/UploadBtn'
 
 
 const Event = () => {
@@ -14,6 +15,7 @@ const Event = () => {
                 <div className='bg-gray-900 p-8 h-screen'>
                     <SearchBar />
                     <SideBar />
+                    <UploadBtn/>
                 </div>
                 <div className='flex flex-col mx-auto max-h-screen overflow-y-auto'>
                     <Post

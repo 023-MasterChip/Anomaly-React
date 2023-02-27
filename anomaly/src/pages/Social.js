@@ -2,8 +2,10 @@ import React from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Post from '../components/Post'
+import RecomCard from '../components/RecomCard'
 import SearchBar from '../components/SearchBar'
 import SideBar from '../components/SideBar'
+import UploadBtn from '../components/UploadBtn'
 
 const Social = () => {
     return (
@@ -13,6 +15,7 @@ const Social = () => {
                 <div className='bg-gray-900 p-8 h-screen'>
                     <SearchBar />
                     <SideBar />
+                    <UploadBtn/>
                 </div>
                 <div className='flex flex-col mx-auto max-h-screen overflow-y-auto'>
                     <Post
@@ -35,13 +38,21 @@ const Social = () => {
                         imageSrc="https://images.unsplash.com/photo-1675947768776-01e190cd45e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDI5fHhIeFlUTUhMZ09jfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                         username="John"
                         title="Its snowing" />
-                        <div className='my-10'></div>
+                    <div className='my-10'></div>
                 </div>
                 <div className='bg-gray-900 p-8 h-screen'>
                     {/* need to edit */}
-                    <SearchBar />
-                    <SideBar />
-                    <div className='mt-24'>
+                    <RecomCard
+                        name='John Doe'
+                        username='The.John'
+                        imageSrc='https://randomuser.me/api/portraits/men/79.jpg'
+                    />
+                    <RecomCard
+                        name='Jane Doe'
+                        username='Doe_Jane'
+                        imageSrc='https://randomuser.me/api/portraits/women/90.jpg'
+                    />
+                    <div className='flex justify-center'>
                         <Footer />
                     </div>
                 </div>
