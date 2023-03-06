@@ -27,16 +27,11 @@ const FileUpload = ({ setShowModal }) => {
 
     async function onSubmit(e) {
         e.preventDefault();
-        const fileUpload = {
-            title: form.title,
-            event: null,
-            imageFile: file,
-            likes: 1,
-        }
-        console.log(fileUpload)
+      
         const formData = new FormData();
         formData.append("title", form.title);
         formData.append("event", form.event);
+        formData.append("username",localUser)
         formData.append("imageFile",file);
         formData.append("likes", 1);
         try {

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const user = localStorage.getItem("username")
+    const [posts,setPosts] = useState([])
     const navigate = useNavigate();
     useEffect(() => {
         if(!user)
@@ -12,22 +13,18 @@ const Home = () => {
             navigate("/")
         }
       },[]);
+      useEffect(()=>{
+        getUserPosts();
+        // console.log("path"+window.location.pathname)
+      },[])
     const [selectedLink, setSelectedLink] = useState('All');
-    const images = [
-        "https://images.unsplash.com/photo-1676153838100-c571de2bdf29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1654940230870-444f28aff3ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDd8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1675457817910-337eb33b8508?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDExfEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1675904626459-ae694b824ac0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1676153838100-c571de2bdf29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1654940230870-444f28aff3ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDd8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1675457817910-337eb33b8508?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDExfEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1675904626459-ae694b824ac0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1676153838100-c571de2bdf29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1654940230870-444f28aff3ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDd8RnpvM3p1T0hONnd8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1675457817910-337eb33b8508?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDExfEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        "https://images.unsplash.com/photo-1675904626459-ae694b824ac0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfEZ6bzN6dU9ITjZ3fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-        // add more images here as needed
-    ];
+   
+    const getUserPosts = async() => {
+        // const userId = localStorage.getItem("userId");
+        fetch("http://localhost:5000/user/posts")
+          .then((response) => response.json())
+          .then((data) => setPosts(data));
+      };
     return (
         <div className='fixed w-full'>
             <Navbar />
@@ -97,7 +94,7 @@ const Home = () => {
                     </ul>
                 </div>
                 <div className='w-screen max-h-screen overflow-y-auto p-4 bg-gray-900'>
-                    <ImageGrid images={images} />
+                    <ImageGrid posts={posts} />
                 </div>
             </div>
 

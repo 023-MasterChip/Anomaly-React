@@ -1,7 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Settings from './Settings'
 
 const Navbar = () => {
+
+    const localUser = localStorage.getItem("username");
+
+    const [userProfile, setUserProfile] = useState([])
+
+    useEffect(() => {
+        const fetchProfile = async (profile) => {
+            try {
+                // const localUser = localStorage.getItem("username");
+                // console.log(username)
+                const url = 'http://localhost:5000/user/profile/' + localUser
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(profile)
+                });
+                if (response.ok) {
+                    const profile = await response.json()
+                    setUserProfile(profile)
+                    // console.log(profile)
+                } else {
+                    throw new Error('Failed to fetch profile data')
+                }
+            } catch (err) {
+                console.log(err.message)
+            }
+        };
+        fetchProfile()
+
+
+    }, [])
+
     const [showModal, setShowModal] = useState(false);
     const [selectedLink, setSelectedLink] = useState('Home');
     return (
@@ -14,7 +49,7 @@ const Navbar = () => {
                     </a>
                     <div className="flex items-center md:order-2">
                         <button onClick={() => setShowModal(true)} type="button" className="flex mr-3 text-sm mx-4 my-2 bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                            <img className="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="user photo" />
+                            <img className="w-10 h-10 rounded-full object-cover" src={userProfile.imagePath} alt="user photo" />
                         </button>
                     </div>
                     <div className="items-end justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
@@ -22,11 +57,11 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="/home"
-                                    className={`block py-2 pl-3 pr-4 rounded ${selectedLink === 'Home'
+                                    className={`block py-2 pl-3 pr-4 rounded ${window.location.pathname === '/home'
                                         ? 'text-blue-400'
                                         : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                         }`}
-                                    onClick={() => setSelectedLink('Home')}
+                                // onClick={() => setSelectedLink('Home')}
                                 >
                                     Home
                                 </a>
@@ -34,11 +69,11 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="/social"
-                                    className={`block py-2 pl-3 pr-4 rounded ${selectedLink === 'Social'
+                                    className={`block py-2 pl-3 pr-4 rounded ${window.location.pathname === '/social'
                                         ? 'text-blue-400'
                                         : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                         }`}
-                                    onClick={() => setSelectedLink('Social')}
+                                // onClick={() => setSelectedLink('Social')}
                                 >
                                     Social
                                 </a>
@@ -46,11 +81,11 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="/event"
-                                    className={`block py-2 pl-3 pr-4 rounded ${selectedLink === 'Event'
+                                    className={`block py-2 pl-3 pr-4 rounded ${window.location.pathname === '/event'
                                         ? 'text-blue-400'
                                         : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                         }`}
-                                    onClick={() => setSelectedLink('Event')}
+                                // onClick={() => setSelectedLink('Event')}
                                 >
                                     Event
                                 </a>
@@ -58,11 +93,11 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="/user"
-                                    className={`block py-2 pl-3 pr-4 rounded ${selectedLink === 'Profile'
+                                    className={`block py-2 pl-3 pr-4 rounded ${window.location.pathname === '/user'
                                         ? 'text-blue-400'
                                         : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                         }`}
-                                    onClick={() => setSelectedLink('Profile')}
+                                // onClick={() => setSelectedLink('Profile')}
                                 >
                                     Profile
                                 </a>
@@ -70,13 +105,13 @@ const Navbar = () => {
                             <li>
                                 <a
                                     href="#"
-                                    className={`block py-2 pl-3 pr-4 rounded ${selectedLink === 'Contact'
+                                    className={`block py-2 pl-3 pr-4 rounded ${window.location.pathname === '/friend'
                                         ? 'text-blue-400'
                                         : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                         }`}
-                                    onClick={() => setSelectedLink('Contact')}
+                                // onClick={() => setSelectedLink('Contact')}
                                 >
-                                    Contact
+                                    Friends
                                 </a>
                             </li>
                         </ul>

@@ -1,12 +1,13 @@
 
 import './App.css';
 import { useState } from 'react';
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Index from './pages/Index';
 import Social from './pages/Social';
 import Event from './pages/Event';
 import User from './pages/User';
+import Friend from './pages/Friend';
 
 function App() {
 
@@ -17,8 +18,9 @@ function App() {
       <Route path="/social" element={<Social />} />
       <Route path="/event" element={<Event />} />
       <Route path="/user" element={<User />} />
+      <Route path="/friend/:friendUser" element={<Friend/>} />
     </Routes>
-    
+
 
 
   );
