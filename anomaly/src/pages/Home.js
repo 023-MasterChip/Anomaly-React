@@ -29,12 +29,12 @@ const Home = () => {
         <div className='fixed w-full'>
             <Navbar />
             <div className='flex flex-col w-full h-screen bg-gray-900'>
-                <div className='bg-gray-900 overflow-y-auto w-full flex justify-between items-start'>
-                    <ul className="flex flex-col p-4 mt-4 border font-Teko border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <div className='bg-gray-900 w-full flex justify-between items-start p-5'>
+                    <ul className="flex flex-col border font-Teko border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <a
                                 href="#"
-                                className={`block py-2 pl-3 pr-4 rounded text-xl ${selectedLink === 'All'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'All'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
@@ -46,7 +46,7 @@ const Home = () => {
                         <li>
                             <a
                                 href="#"
-                                className={`block py-2 pl-3 pr-4 rounded text-xl ${selectedLink === '2D'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === '2D'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
@@ -58,7 +58,7 @@ const Home = () => {
                         <li>
                             <a
                                 href="#"
-                                className={`block py-2 pl-3 pr-4 rounded text-xl ${selectedLink === '3D'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === '3D'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
@@ -70,7 +70,7 @@ const Home = () => {
                         <li>
                             <a
                                 href="#"
-                                className={`block py-2 pl-3 pr-4 rounded text-xl ${selectedLink === 'Animation'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Animation'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
@@ -82,7 +82,7 @@ const Home = () => {
                         <li>
                             <a
                                 href="#"
-                                className={`block py-2 pl-3 pr-4 rounded text-xl ${selectedLink === 'Nodes'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Nodes'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}

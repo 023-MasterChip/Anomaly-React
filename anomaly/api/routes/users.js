@@ -28,6 +28,15 @@ userRoutes.route("/user/follow/:username/:following").get(function (req, respons
   });
 });
 
+userRoutes.route("/user/addcomment/:id/:user").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  const data = {...req.body,post_id:req.params.id,username:req.params.user}
+
+  db_connect.collection("post_comments").insertOne(data, function (err, res) {
+    if (err) throw err;
+    response.status(200).json(res);
+  });
+});
 
 //get data
 userRoutes.route("/user/profile/:username").get(async (req, res) => {
@@ -44,6 +53,48 @@ userRoutes.route("/user/profile/:username").get(async (req, res) => {
   }
 });
 
+userRoutes.route("/user/comment/:id").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    let myquery = { _id: ObjectId(req.params.id) };
+    const post = await db.collection("posts").findOne(myquery);
+    // console.log(post)
+    res.status(200).json(post);
+   
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
+userRoutes.route("/user/getCount/:user").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    let likeCount =0;
+    
+    await db.collection("posts").find({ username: req.params.user },{ _id:0}).toArray(async (err, result)=> {
+      if(err) throw err;
+      for(var i=0;i<result.length;i++){
+        likeCount+=parseInt(result[i].likes)    
+      }  
+      const followingCount = await db.collection("following").find({username:req.params.user}).count();
+      const followerCount = await db.collection("following").find({following:req.params.user}).count();
+      const postCount = await db.collection("posts").find({username:req.params.user}).count();
+      res.status(200).json({
+        postCount: postCount,
+        likeCount: likeCount,
+        followerCount: followerCount,
+        followingCount: followingCount,
+        
+      });
+      }); 
+
+    // res.status(200).json(post);
+   
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
 userRoutes.route("/user/posts/:username").get(async (req, res) => {
   try {
     const db = await dbo.getDb();
@@ -54,6 +105,53 @@ userRoutes.route("/user/posts/:username").get(async (req, res) => {
       // console.log(result)
       res.status(200).send(result);
       });       
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
+userRoutes.route("/user/getcomments/:id").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    // const username = localStorage.getItem("username");
+    // console.log(username)
+    await db.collection("post_comments").find({ post_id: req.params.id },{_id:0}).sort({_id:-1}).toArray(function (err, result) {
+      if(err) throw err;
+      // console.log(result)
+      res.status(200).send(result);
+      });       
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
+userRoutes.route("/user/friend/:username").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    let following = [];
+    let friends = [];
+    // const username = localStorage.getItem("username");
+    // console.log(username)
+    await db.collection("following").find({ username: req.params.username },{_id:0}).sort({_id:-1}).toArray(async (err, result)=> {
+      if(err) throw err;
+      for(var i=0;i<result.length;i++){
+        // console.log(result[i])
+        following.push(result[i])
+      }  
+      
+      for(var i=0;i<following.length;i++){
+        // console.log(following[i].following) 
+          const profile = await db.collection("users").findOne({ username: following[i].following }); 
+          friends.push(profile)
+      }
+      res.status(200).send(friends);
+      // console.log(friends)     
+      }); 
+    
+      
+      // console.log(friends)      
 
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -93,6 +191,40 @@ userRoutes.route("/user/search/:searchString").get(async (req, res) => {
   }
 });
 
+userRoutes.route("/user/postlike/:id/:user").get(async(req, res)=> {
+  let db_connect = dbo.getDb();
+  const db = await dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  const post = await db.collection("posts").findOne(myquery); 
+  var x = parseInt(post.likes)
+  let newvalues = {
+    $set: {
+      likes: ++x,
+    },
+  }
+  db_connect
+    .collection("posts")
+    .updateOne(myquery, newvalues, function (err, res) {
+      if (err) throw err;
+      console.log("1 document updated")
+     
+    })
+    const data = {post_id:req.params.id,username:req.params.user}
+
+    // const liked = await db.collection("posts").findOne({$and: [{post_id: req.params.id}, {username: req.params.user}]}); 
+    // console.log(liked)
+    // if(liked){
+    //   console.log("already liked")
+    // }else{
+      db_connect.collection("user_liked").insertOne(data, function (err, res) {
+        if (err) throw err;
+        
+      });
+    // }
+ 
+    res.status(200).send("Updated")
+})
+
 //Update user
 userRoutes.route("/user/update/:username").post(function (req, res) {
   let db_connect = dbo.getDb();
@@ -108,8 +240,9 @@ userRoutes.route("/user/update/:username").post(function (req, res) {
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
       console.log("1 document updated")
-      // res.json(res)
+     
     })
+    res.status(200).send("Updated")
 })
 
 //Image upload
@@ -120,6 +253,7 @@ userRoutes.route("/user/image/:username").post(upload.single('imageFile'), funct
   db_connect.collection("posts").insertOne(postData, function (err, res) {
     if (err) throw err;
   });
+  res.status(200).send("Updated")
 })
 
 //User profile image
@@ -143,6 +277,7 @@ userRoutes.route("/user/userImage/:username").post(upload.single('imageFile'), f
       console.log("1 document updated")
       // res.json(res)
     })
+    res.status(200).send("Updated")
 })
 
 
@@ -167,6 +302,7 @@ userRoutes.route("/user/login").post(function (req, res) {
             }
             return res.status(200).json({
               name: result.username,
+              imagePath: result.imagePath,
               token,
               msg: 'Login Successful.'
             });

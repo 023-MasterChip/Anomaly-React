@@ -102,7 +102,7 @@ const Navbar = () => {
                                     Profile
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a
                                     href="#"
                                     className={`block py-2 pl-3 pr-4 rounded ${window.location.pathname === '/friend'
@@ -113,7 +113,7 @@ const Navbar = () => {
                                 >
                                     Friends
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

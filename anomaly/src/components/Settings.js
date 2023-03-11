@@ -7,7 +7,7 @@ const Settings = ({ setShowModal }) => {
   const localUser = localStorage.getItem("username");
 
   const [userProfile, setUserProfile] = useState([])
-  const [showProfileModal,setShowProfileModal]  = useState(false)
+  const [showProfileModal, setShowProfileModal] = useState(false)
 
   const [form, setForm] = useState({
     name: "",
@@ -70,20 +70,24 @@ const Settings = ({ setShowModal }) => {
     console.log(editedPerson)
 
     // This will send a post request to update the data in the database.
-    await fetch('http://localhost:5000/user/update/' + localUser, {
+    const response = await fetch('http://localhost:5000/user/update/' + localUser, {
       method: "POST",
       body: JSON.stringify(editedPerson),
       headers: {
         'Content-Type': 'application/json'
       },
     });
+    if (response.ok) {
+      setShowModal(false)
+      window.location.reload()
+    }
 
     // navigate("/");
   }
   return (
     <>
-   {showProfileModal? <ProfileModal setShowProfileModal={setShowProfileModal}/>:null}
-      <div className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 ${showProfileModal?"":"z-50"} outline-none focus:outline-none`}>
+      {showProfileModal ? <ProfileModal setShowProfileModal={setShowProfileModal} /> : null}
+      <div className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 ${showProfileModal ? "" : "z-50"} outline-none focus:outline-none`}>
         <div className="relative w-auto my-6 mx-auto max-w-3xl">
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -97,7 +101,7 @@ const Settings = ({ setShowModal }) => {
             <div className="relative p-6 flex-auto">
               <div className='w-full flex justify-center'>
                 <img
-                  onClick={()=>setShowProfileModal(true)}
+                  onClick={() => setShowProfileModal(true)}
                   className='w-20 h-20 object-cover rounded-full'
                   src={userProfile.imagePath}
                   alt='user image'

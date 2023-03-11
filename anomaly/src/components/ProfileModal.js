@@ -31,13 +31,15 @@ const ProfileModal = ({ setShowProfileModal }) => {
                 body: formData,
             });
             if (!response.ok) {
-                const err = await response.json();
-                alert("login failed");
-                console.log("Looks like there was a problem.", err);
+                // const err = await response.json();
+                alert("Update failed");
+                // console.log("Looks like there was a problem.", err);
                 return;
             } else {
-                const msg = await response.json();
+               
                 // setOpen(false);
+                setShowProfileModal(false)
+                window.location.reload()
                 // getGroups();
             }
         } catch (err) {

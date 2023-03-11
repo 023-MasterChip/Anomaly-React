@@ -4,6 +4,7 @@ const FileUpload = ({ setShowModal }) => {
     const [imagePreview, setImagePreview] = useState(null);
     const [file, setFile] = useState(null);
     const localUser = localStorage.getItem("username");
+    const userImage = localStorage.getItem("userImage");
 
     const [form, setForm] = useState({
         title: "",
@@ -33,6 +34,7 @@ const FileUpload = ({ setShowModal }) => {
         formData.append("event", form.event);
         formData.append("username",localUser)
         formData.append("imageFile",file);
+        formData.append("userImage",userImage)
         formData.append("likes", 1);
         try {
             const url = "http://localhost:5000/user/image/" + localUser;
@@ -50,8 +52,9 @@ const FileUpload = ({ setShowModal }) => {
                 console.log("Looks like there was a problem.", err);
                 return;
             } else {
-                const msg = await response.json();
-                // setOpen(false);
+                // const msg = await response.json();
+                setShowModal(false);
+                window.location.reload()
                 // getGroups();
             }
         } catch (err) {
@@ -88,7 +91,7 @@ const FileUpload = ({ setShowModal }) => {
                                         <input type='text' name='title' onChange={(e) => updateForm({ title: e.target.value })} placeholder='title' className='mx-4 px-4'></input>
                                     </div>
                                     <div className='flex flex-row justify-between  m-2'>
-                                        <label className='mx-4 font-Teko text-2xl'>Event</label>
+                                        <label className='mx-4 font-Teko text-2xl'>Category</label>
                                         <input type='text' name='event' onChange={(e) => updateForm({ event: e.target.value })} placeholder='event' className='mx-4 px-4'></input>
                                     </div>
                                     <div className='flex justify-center'>

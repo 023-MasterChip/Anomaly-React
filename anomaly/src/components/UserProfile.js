@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 const UserProfile = () => {
 
     const [userProfile, setUserProfile] = useState([])
+    const [userData,setUserData] = useState("")
+    const user = localStorage.getItem("username");
 
     useEffect(() => {
         const fetchProfile = async (profile) => {
@@ -32,6 +34,12 @@ const UserProfile = () => {
         fetchProfile();
     }, []);
 
+    useEffect(()=>{
+        fetch("http://localhost:5000/user/getCount/" + user)
+        .then((response) => response.json())
+        .then((data) => setUserData(data));
+    },[])
+
     return (
         <div className='bg-gray-900'>
             <div className='flex justify-center'>
@@ -47,24 +55,24 @@ const UserProfile = () => {
             <div className='flex flex-row justify-between mx-60 mt-5'>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Posts</h1>
-                    <p className='text-white text-center text-2xl mt-4'>541</p>
+                    <p className='text-white text-center text-2xl mt-4'>{userData.postCount}</p>
                 </div>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Likes</h1>
-                    <p className='text-white text-center text-2xl mt-4'>13K</p>
+                    <p className='text-white text-center text-2xl mt-4'>{userData.likeCount}</p>
                 </div>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Followers</h1>
-                    <p className='text-white text-center text-2xl mt-4'>2K</p>
+                    <p className='text-white text-center text-2xl mt-4'>{userData.followerCount}</p>
                 </div>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Following</h1>
-                    <p className='text-white text-center text-2xl mt-4'>1.6K</p>
+                    <p className='text-white text-center text-2xl mt-4'>{userData.followingCount}</p>
                 </div>
-                <div>
+                {/* <div>
                     <h1 className='text-white font-bold text-3xl'>Events</h1>
                     <p className='text-white text-center text-2xl mt-4'>147</p>
-                </div>
+                </div> */}
             </div>
         </div>
     )

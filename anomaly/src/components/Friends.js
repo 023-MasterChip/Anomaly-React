@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from './Card'
 
 const Friends = () => {
+    const user = localStorage.getItem("username")
+    const [friends, setFriends] = useState([])
+    useEffect(() => {
+        getFriends()
+    }, [])
+    const getFriends = async () => {
+        // const userId = localStorage.getItem("userId");
+        fetch("http://localhost:5000/user/friend/" + user)
+            .then((response) => response.json())
+            .then((data) => setFriends(data));
+    };
     return (
         <div className='mx-24 w-screen'>
             <div className='grid grid-cols-4 gap-4'>
-                <Card
-                    imageSrc='https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-                    user='someguy.user'
-                    name='someguy'
-                />
+                {friends.map((friend, key) => (
+                    <Card
+                        imageSrc={friend.imagePath}
+                        user={friend.username}
+                        name={friend.name}
+                    />)
+                )
+
+                }
             </div>
 
         </div>
