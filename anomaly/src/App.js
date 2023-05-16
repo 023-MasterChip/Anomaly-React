@@ -11,16 +11,16 @@ import Friend from './pages/Friend';
 import Comment from './pages/Comment';
 
 function App() {
-
+  const user = localStorage.getItem("username")
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/social" element={<Social />} />
-      <Route path="/event" element={<Event />} />
-      <Route path="/user" element={<User />} />
-      <Route path="/comment/:id" element={<Comment />} />
-      <Route path="/friend/:friendUser" element={<Friend />} />
+      <Route path="/home" element={user?<Home />:<Index/>} />
+      <Route path="/social" element={user?<Social />:<Index/>} />
+      <Route path="/event" element={user?<Event />:<Index/>} />
+      <Route path="/user" element={user?<User />:<Index/>} />
+      <Route path="/comment/:id" element={user?<Comment />:<Index/>} />
+      <Route path="/friend/:friendUser" element={user?<Friend />:<Index/>} />
     </Routes>
 
 

@@ -1,9 +1,7 @@
-* Like, Comment
-* Display friends
-* Art display
+
 * Event
-* QoL fixes
-	* modal closing
-	* page refresh
 * Logout fix
 * Search fix
+
+*add category
+*Event page

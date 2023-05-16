@@ -95,6 +95,32 @@ userRoutes.route("/user/getCount/:user").get(async (req, res) => {
   }
 });
 
+//add event
+userRoutes.route("/user/event/:username").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  const data = {...req.body,username:req.params.username}
+  db_connect.collection("events").insertOne(data, function (err, res) {
+    if (err) throw err;
+    response.status(200).json(res);
+  });
+});
+
+userRoutes.route("/user/getevents").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    // const username = localStorage.getItem("username");
+    // console.log(username)
+    await db.collection("events").find({ },{ _id:0}).sort({_id:-1}).toArray(function (err, result) {
+      if(err) throw err;
+      // console.log(result)
+      res.status(200).send(result);
+      });       
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
 userRoutes.route("/user/posts/:username").get(async (req, res) => {
   try {
     const db = await dbo.getDb();
@@ -165,9 +191,60 @@ userRoutes.route("/user/posts").get(async (req, res) => {
     // console.log(username)
     await db.collection("posts").find({ },{imagePath:1, _id:0}).sort({_id:-1}).toArray(function (err, result) {
       if(err) throw err;
-      // console.log(result)
+      // for(var i=0;i<result.length;i++){
+      //   let tempId = result[i]._id.toString()
+      //   // console.log(tempId)
+      // }
       res.status(200).send(result);
       });       
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
+userRoutes.route("/user/homeposts/:category").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    if(req.params.category === 'All'){
+      await db.collection("posts").find({ },{imagePath:1, _id:0}).sort({_id:-1}).toArray(function (err, result) {
+        if(err) throw err;
+        // console.log(result)
+        res.status(200).send(result);
+        }); 
+    }
+    else{
+      await db.collection("posts").find({ category: req.params.category},{imagePath:1, _id:0}).sort({_id:-1}).toArray(function (err, result) {
+        if(err) throw err;
+        // console.log(result)
+        res.status(200).send(result);
+        }); 
+    }
+         
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
+userRoutes.route("/user/filterevents/:event").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    if(req.params.event === 'All'){
+      await db.collection("posts").find({ "event": {  $ne: "" } } ,{imagePath:1, _id:0}).sort({_id:-1}).toArray(function (err, result) {
+        if(err) throw err;
+        // console.log("ne",result)
+        res.status(200).send(result);
+        }); 
+    }
+    else{
+      await db.collection("posts").find({ event: req.params.event},{imagePath:1, _id:0}).sort({_id:-1}).toArray(function (err, result) {
+        if(err) throw err;
+        // console.log(result)
+        res.status(200).send(result);
+        }); 
+    }
+         
 
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -225,6 +302,22 @@ userRoutes.route("/user/postlike/:id/:user").get(async(req, res)=> {
     res.status(200).send("Updated")
 })
 
+userRoutes.route("/user/getlikes/:username").get(async (req, res) => {
+  try {
+    const db = await dbo.getDb();
+    // const username = localStorage.getItem("username");
+    // console.log(username)
+    await db.collection("user_liked").find({username: req.params.username },{ _id:0}).sort({_id:-1}).toArray(function (err, result) {
+      if(err) throw err;
+      // console.log(result)
+      res.status(200).send(result);
+      });       
+
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
+
 //Update user
 userRoutes.route("/user/update/:username").post(function (req, res) {
   let db_connect = dbo.getDb();
@@ -249,7 +342,7 @@ userRoutes.route("/user/update/:username").post(function (req, res) {
 userRoutes.route("/user/image/:username").post(upload.single('imageFile'), function (req, res) {
   let db_connect = dbo.getDb();
   const postData = { ...req.body, imagePath: "http://localhost:5000/public/images/" + req.file.filename }
-  console.log(req.body)
+  // console.log(req.body)
   db_connect.collection("posts").insertOne(postData, function (err, res) {
     if (err) throw err;
   });
@@ -270,6 +363,7 @@ userRoutes.route("/user/userImage/:username").post(upload.single('imageFile'), f
       imagePath: "http://localhost:5000/public/images/" + req.file.filename
     },
   }
+  let image = "http://localhost:5000/public/images/" + req.file.filename
   db_connect
     .collection("users")
     .updateOne(myquery, newvalues, function (err, res) {
@@ -277,7 +371,7 @@ userRoutes.route("/user/userImage/:username").post(upload.single('imageFile'), f
       console.log("1 document updated")
       // res.json(res)
     })
-    res.status(200).send("Updated")
+    res.status(200).json({msg:"updated",userImage:image})
 })
 
 

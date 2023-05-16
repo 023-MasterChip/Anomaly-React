@@ -14,7 +14,7 @@ const Register = ({ setShowModal }) => {
         if (comp === 'login') {
             return <Login />;
         } else if (comp === 'signup') {
-            return <Signup />;
+            return <Signup setShowModal={setShowModal}/>;
         }
         return null;
     }

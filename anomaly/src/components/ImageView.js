@@ -6,13 +6,13 @@ const ImageView = ({ setShowModal, posts }) => {
     const navigate = useNavigate()
     return (
         <>
-            <div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none'>
-                <div className="relative w-auto my-6 mx-auto max-w-3xl bg-gray-600 rounded-md">
+            <div className='justify-center items-center flex fixed inset-0 z-50 outline-none focus:outline-none'>
+                <div className="relative w-auto my-6 mx-auto max-w-7xl bg-gray-600 rounded-md">
                     {/*content*/}
                     <div className='flex flex-row m-5'>
-                        <div>
-                            <img className='w-auto h-auto object-fill'
-                                src={posts.image} alt='' />
+                        <div className='h-auto w-auto'>
+                            <img className='w-full max-h-screen object-fill'
+                                src={posts.image} alt='uploadedimage' />
                         </div>
                         <div className='flex flex-col justify-center items-center ml-5 w-52'>
                             <div class="rounded-full h-44 w-44 bg-gray-800 flex items-center justify-center overflow-hidden">
@@ -26,7 +26,7 @@ const ImageView = ({ setShowModal, posts }) => {
                                 <button
                                     className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                     type="submit"
-                                    onClick={()=>navigate(`/friend/${posts.user}`)}
+                                    onClick={() => navigate(`/friend/${posts.user}`)}
                                 >
                                     View Profile
                                 </button>

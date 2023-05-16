@@ -1,0 +1,31 @@
+.btnFollow {
+    color: #e3e3e3;
+    border: 2px solid #0008ff;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: transparent;
+}
+
+.btnFollow:hover {
+    box-shadow: 2px 2px 15px #0008ff inset;
+}
+
+.btnFollow:active {
+    box-shadow: 2px 2px 20px #0008ff inset;
+}
+
+.btnReport {
+    color: #e3e3e3;
+    border: 2px solid #ff0026;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: transparent;
+}
+
+.btnReport:hover {
+    box-shadow: 2px 2px 15px #ff0026 inset;
+}
+
+.btnReport:active {
+    box-shadow: 2px 2px 20px #ff0026 inset;
+}

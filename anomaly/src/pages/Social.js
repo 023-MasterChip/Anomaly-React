@@ -17,6 +17,7 @@ const Social = () => {
 
     const getUserPosts = async() => {
         // const userId = localStorage.getItem("userId");
+        // let cat = 'All'
         fetch("http://localhost:5000/user/posts")
           .then((response) => response.json())
           .then((data) => setPosts(data));
@@ -29,7 +30,7 @@ const Social = () => {
                 <div className='bg-gray-900 p-8 h-screen'>
                     <SearchBar />
                     <SideBar />
-                    <UploadBtn/>
+                    <UploadBtn />
                 </div>
                 <div className='flex flex-col mx-auto max-h-screen overflow-y-auto'>
                     <Post posts={posts} />
@@ -39,13 +40,13 @@ const Social = () => {
                 <div className='bg-gray-900 p-8 h-screen'>
                     {/* need to edit */}
                     <RecomCard
-                        name='John Doe'
-                        username='The.John'
+                        name='Jacob Frye'
+                        username='Frye_J'
                         imageSrc='https://randomuser.me/api/portraits/men/79.jpg'
                     />
                     <RecomCard
-                        name='Jane Doe'
-                        username='Doe_Jane'
+                        name='Evie Ainsal'
+                        username='Ains_Eve'
                         imageSrc='https://randomuser.me/api/portraits/women/90.jpg'
                     />
                     <div className='flex justify-center'>

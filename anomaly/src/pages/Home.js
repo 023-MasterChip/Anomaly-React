@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
     const user = localStorage.getItem("username")
     const [posts,setPosts] = useState([])
+    const [selectedLink, setSelectedLink] = useState('All');
+    const [category, setCategory] = useState('All')
     const navigate = useNavigate();
     useEffect(() => {
         if(!user)
@@ -16,12 +18,13 @@ const Home = () => {
       useEffect(()=>{
         getUserPosts();
         // console.log("path"+window.location.pathname)
-      },[])
-    const [selectedLink, setSelectedLink] = useState('All');
+      },[category])
+   
    
     const getUserPosts = async() => {
         // const userId = localStorage.getItem("userId");
-        fetch("http://localhost:5000/user/posts")
+        console.log(category)
+        fetch("http://localhost:5000/user/homeposts/"+category)
           .then((response) => response.json())
           .then((data) => setPosts(data));
       };
@@ -38,7 +41,10 @@ const Home = () => {
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
-                                onClick={() => setSelectedLink('All')}
+                                onClick={() => {
+                                    setCategory('All')
+                                    // getUserPosts()
+                                    setSelectedLink('All')}}
                             >
                                 All
                             </a>
@@ -50,7 +56,10 @@ const Home = () => {
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
-                                onClick={() => setSelectedLink('2D')}
+                                onClick={() => {
+                                    setCategory('2D')
+                                    // getUserPosts()
+                                    setSelectedLink('2D')}}
                             >
                                 2D
                             </a>
@@ -62,7 +71,10 @@ const Home = () => {
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
-                                onClick={() => setSelectedLink('3D')}
+                                onClick={() => {
+                                    setCategory('3D')
+                                    // getUserPosts()
+                                    setSelectedLink('3D')}}
                             >
                                 3D
                             </a>
@@ -70,25 +82,61 @@ const Home = () => {
                         <li>
                             <a
                                 href="#"
-                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Animation'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Concept Art'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
-                                onClick={() => setSelectedLink('Animation')}
+                                onClick={() => {
+                                    setCategory('Concept Art')
+                                    // getUserPosts()
+                                    setSelectedLink('Concept Art')}}
                             >
-                                Animation
+                                Concept Art
                             </a>
                         </li>
                         <li>
                             <a
                                 href="#"
-                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Nodes'
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Game Art'
                                     ? 'text-white bg-blue-700'
                                     : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
                                     }`}
-                                onClick={() => setSelectedLink('Nodes')}
+                                onClick={() => {
+                                    setCategory('Game Art')
+                                    // getUserPosts()
+                                    setSelectedLink('Game Art')}}
                             >
-                                Nodes
+                                Game Art
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Environment'
+                                    ? 'text-white bg-blue-700'
+                                    : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                                    }`}
+                                onClick={() => {
+                                    setCategory('Environment')
+                                    // getUserPosts()
+                                    setSelectedLink('Environment')}}
+                            >
+                                Environment
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#"
+                                className={`block py-1 px-4 rounded text-xl ${selectedLink === 'Event'
+                                    ? 'text-white bg-blue-700'
+                                    : 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                                    }`}
+                                onClick={() => {
+                                    setCategory('Event')
+                                    // getUserPosts()
+                                    setSelectedLink('Event')}}
+                            >
+                                Event
                             </a>
                         </li>
                     </ul>

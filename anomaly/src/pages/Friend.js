@@ -7,6 +7,7 @@ import FriendProfile from '../components/FriendProfile';
 const Friend = () => {
     const [comp, setComp] = useState(0);
     const user = localStorage.getItem("username")
+    console.log(user)
     const [posts, setPosts] = useState([])
     const { friendUser } = useParams();
 
@@ -16,7 +17,7 @@ const Friend = () => {
 
     const getUserPosts = async () => {
         // const userId = localStorage.getItem("userId");
-        fetch("http://localhost:5000/user/posts/" + user)
+        fetch("http://localhost:5000/user/posts/" + friendUser)
             .then((response) => response.json())
             .then((data) => setPosts(data));
     };

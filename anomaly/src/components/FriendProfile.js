@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react'
+import './ButtonStyle.css'
 
-const FriendProfile = ({friendUser}) => {
+const FriendProfile = ({ friendUser }) => {
 
     const [friendProfile, setFriendProfile] = useState("")
     const localUser = localStorage.getItem("username");
+    const [count, setCount] = useState(null)
 
     useEffect(() => {
-        const fetchFriend = () =>{
+        const fetchFriend = () => {
             fetch("http://localhost:5000/user/profile/" + friendUser)
-            .then((response) => response.json())
-            .then((data) => setFriendProfile(data));
+                .then((response) => response.json())
+                .then((data) => setFriendProfile(data));
         }
-        fetchFriend();
+        const fetchCount = () => {
+            fetch("http://localhost:5000/user/getCount/" + friendUser)
+                .then((response) => response.json())
+                .then((data) => setCount(data));
+        }
+        fetchFriend()
+        fetchCount()
     }, []);
 
-    const followFriend = () =>{
+    const followFriend = () => {
         fetch("http://localhost:5000/user/follow/" + localUser + "/" + friendProfile.username)
             .then((response) => response.json())
             .then((data) => console.log(data));
@@ -35,32 +43,28 @@ const FriendProfile = ({friendUser}) => {
             <div className='flex flex-row justify-between mx-60 mt-5'>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Posts</h1>
-                    <p className='text-white text-center text-2xl mt-4'>541</p>
+                    <p className='text-white text-center text-2xl mt-4'>{count && count.postCount}</p>
                 </div>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Likes</h1>
-                    <p className='text-white text-center text-2xl mt-4'>13K</p>
+                    <p className='text-white text-center text-2xl mt-4'>{count && count.likeCount}</p>
                 </div>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Followers</h1>
-                    <p className='text-white text-center text-2xl mt-4'>2K</p>
+                    <p className='text-white text-center text-2xl mt-4'>{count && count.followerCount}</p>
                 </div>
                 <div>
                     <h1 className='text-white font-bold text-3xl'>Following</h1>
-                    <p className='text-white text-center text-2xl mt-4'>1.6K</p>
-                </div>
-                <div>
-                    <h1 className='text-white font-bold text-3xl'>Events</h1>
-                    <p className='text-white text-center text-2xl mt-4'>147</p>
+                    <p className='text-white text-center text-2xl mt-4'>{count && count.followingCount}</p>
                 </div>
             </div>
             <div className='flex justify-center m-4'>
-                <form>
-                    <div className='flex justify-center'>
-                        <button className='text-white' onClick={()=>followFriend()}>Follow</button>
+                <form className='flex flex-row w-1/2 justify-between mt-6'>
+                    <div className='flex justify-start'>
+                        <button className='text-white btnFollow' onClick={() => followFriend()}>Follow</button>
                     </div>
-                    <div>
-                        <button className='text-white'>Report</button>
+                    <div className='flex'>
+                        <button className='text-white btnReport'>Report</button>
                     </div>
                 </form>
             </div>

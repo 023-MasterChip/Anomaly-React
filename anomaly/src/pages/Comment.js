@@ -44,7 +44,7 @@ const Comment = () => {
         } else {
             // const data = await response.json();
         //    console.log("comment added")
-        window.location.reload()
+        getComments()
         }
     }
 

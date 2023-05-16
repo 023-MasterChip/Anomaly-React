@@ -28,6 +28,7 @@ const Login = () => {
             localStorage.setItem('username', data.name);
             localStorage.setItem('userImage', data.imagePath);
             navigate("/home");
+            window.location.reload()
         }
     }
     return (

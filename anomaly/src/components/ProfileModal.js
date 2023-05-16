@@ -36,7 +36,8 @@ const ProfileModal = ({ setShowProfileModal }) => {
                 // console.log("Looks like there was a problem.", err);
                 return;
             } else {
-               
+                const data = await response.json();
+                localStorage.setItem('userImage', data.userImage);               
                 // setOpen(false);
                 setShowProfileModal(false)
                 window.location.reload()

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 
-const Signup = () => {
-  const {register, handleSubmit} = useForm();
+const Signup = ({ setShowModal }) => {
+  const { register, handleSubmit } = useForm();
 
   const saveForm = async (data) => {
- 
+
     // console.log(data)
     const url = 'http://localhost:5000/user/signup';
     const response = await fetch(url, {
@@ -23,7 +23,8 @@ const Signup = () => {
         err);
       return;
     } else {
-      const data = await response.json();
+      // const data = await response.json();
+      setShowModal(false)
     }
   }
 

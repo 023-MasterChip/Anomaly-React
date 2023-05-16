@@ -3,6 +3,7 @@ import './Card.css'
 
 const Card = ({ imageSrc, user, name }) => {
     return (
+        <a href={`/friend/${user}`}>
         <div class="card">
             <b></b>
             <img
@@ -13,6 +14,7 @@ const Card = ({ imageSrc, user, name }) => {
                 <p class="title">{user}<br /><span>{name}</span></p>
             </div>
         </div>
+        </a>
     )
 }
 
